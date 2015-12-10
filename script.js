@@ -16,7 +16,7 @@ function search(pageToken) {
         part: 'snippet', 
         maxResults: 5,
         type: "video",
-    }
+    };
     if (pageToken) {
         requestOptions.pageToken = pageToken;
     }
@@ -33,7 +33,7 @@ function search(pageToken) {
         }
         $('#next-button').css('visibility', nextVis);
         
-        prevPageToken = response.result.prevPageToken
+        prevPageToken = response.result.prevPageToken;
         var prevVis = prevPageToken ? 'visible' : 'hidden';
         $('#prev-button').css('visibility', prevVis);
         
@@ -43,7 +43,7 @@ function search(pageToken) {
             displayResult(item);
         });
     });
- }; 
+ } 
     
 function displayResult(videoSnippet){
         var title = videoSnippet.snippet.title;

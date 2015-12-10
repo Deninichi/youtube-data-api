@@ -30,4 +30,8 @@
     margin: -22px 10px 0 0;
     text-align: right;
 }
-    
+
+.button-container {
+    padding-top: 10px;
+    text-align: center;
+}
