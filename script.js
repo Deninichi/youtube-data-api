@@ -25,7 +25,6 @@ function search(pageToken) {
 
         nextPageToken = response.result.nextPageToken;
         var nextVis;
-        
         if (nextPageToken && count < 4){
             nextVis = 'visible';
         }
