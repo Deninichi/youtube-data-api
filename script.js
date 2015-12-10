@@ -1,5 +1,5 @@
-var playlistId, nextPageToken, prevPageToken;
-
+var nextPageToken, prevPageToken;
+var count = 1;
 function onClientLoad() {
     gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
 }
@@ -21,14 +21,25 @@ function search(pageToken) {
         requestOptions.pageToken = pageToken;
     }
     var request = gapi.client.youtube.search.list(requestOptions);
-    request.execute(function(response) {       
+    request.execute(function(response) {  
+
         nextPageToken = response.result.nextPageToken;
-        var nextVis = nextPageToken ? 'visible' : 'hidden';
+        var nextVis;
+        
+        if (nextPageToken && count < 4){
+            nextVis = 'visible';
+        }
+        else{
+            nextVis = 'hidden';
+        }
         $('#next-button').css('visibility', nextVis);
+        
         prevPageToken = response.result.prevPageToken
         var prevVis = prevPageToken ? 'visible' : 'hidden';
         $('#prev-button').css('visibility', prevVis);
+        
         var results = response.result.items;
+        $("#count").html('Страница ' + count);
         $.each(results, function(index, item){
             displayResult(item);
         });
@@ -43,9 +54,11 @@ function displayResult(videoSnippet){
     }
     
 function nextPage() {
-  search(nextPageToken);
+    count++;
+    search(nextPageToken);
 }
 
 function previousPage() {
-  search(prevPageToken);
+    count--;
+    search(prevPageToken);
 }   
