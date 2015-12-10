@@ -30,7 +30,6 @@ function search() {
         
         var results = response.result;
         $.each(results.items, function(index, item){
-            $("#main").append(results.nextPageToken);
             $("#search-container").append('<div style="padding-bottom: 20px;"><img src="'+item.snippet.thumbnails.default.url+'" /><a href="https://www.youtube.com/watch?v=' + item.id.videoId + '" /><span>' + item.snippet.title + '</span></a></div>');
         });
     });
