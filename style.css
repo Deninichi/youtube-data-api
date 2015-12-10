@@ -1,0 +1,30 @@
+#main {
+    width: 822px;
+    margin: auto;
+}
+
+#main table {  
+    width: 822px;
+    color: #4495cc;
+    margin-bottom: -30px;
+}
+
+
+#search-container {
+    padding-left: 20px;
+    padding-top: 50px;
+    background: linear-gradient(to top, rgba(234, 247, 254, 0) 90%, rgba(54, 172, 241, 0.15) 100%);
+    width: 800px;
+    margin: auto;
+    border-radius: 10px;
+    border: solid 1px rgba(68, 149, 204, 0.49);
+}  
+  
+
+
+#search-container span {
+    position: absolute;
+    margin: 40px 0px 0px 20px;
+    width: 650px;
+}  
+    

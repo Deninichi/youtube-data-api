@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<script>
+function onClientLoad() {
+    gapi.client.load('youtube', 'v3', onYouTubeApiLoad);
+}
+
+function onYouTubeApiLoad() {
+    gapi.client.setApiKey('AIzaSyAATVsbGeW7bNnE7mX1ln7Lyy86VScqlO0');
+    search();
+}
+
+function search() {
+    var request = gapi.client.youtube.search.list({
+        q: "spring MVC",
+        part: 'snippet', 
+        maxResults: 5,
+        type: "video",
+        });
+    
+    request.execute(function(response) {
+        
+        nextPageToken = response.result.nextPageToken;
+        var nextVis = nextPageToken ? 'visible' : 'hidden';
+        $('#next-button').css('visibility', nextVis);
+        prevPageToken = response.result.prevPageToken
+        var prevVis = prevPageToken ? 'visible' : 'hidden';
+        $('#prev-button').css('visibility', prevVis);
+        
+        var results = response.result;
+        $.each(results.items, function(index, item){
+            $("#main").append(results.nextPageToken);
+            $("#search-container").append('<div style="padding-bottom: 20px;"><img src="'+item.snippet.thumbnails.default.url+'" /><a href="https://www.youtube.com/watch?v=' + item.id.videoId + '" /><span>' + item.snippet.title + '</span></a></div>');
+        });
+    });
+};        
+
+</script>
+<html>
+<script src="https://apis.google.com/js/client.js?onload=onClientLoad" type="text/javascript"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+    <body>
+        <div id="main">
+            <table>
+                <tr>
+                <td style="text-align: left;"><h2>Videos</h2></td>
+                <td style="text-align: right;">spring MVC</td>
+                </tr>
+            </table>
+            <hr color="#4495CC">
+            <div id="search-container"></div>
+            <div class="button-container">
+                <button id="prev-button" class="paging-button" onclick="previousPage();">Previous Page</button>
+                <button id="next-button" class="paging-button" onclick="nextPage();">Next Page</button>
+             </div>
+        </div>
+            
+    </body>
+</html>
